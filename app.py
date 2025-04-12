@@ -189,9 +189,10 @@ if st.button("Process Files"):
                 df_drive['Destination Customer'] = df_drive.groupby(['Cleaners', 'Appointment Date'])['Customer Full Name'].shift(-1)
                 df_drive.dropna(subset=['Destination Address'], inplace=True)
                 df_drive.rename(columns={'Full Address': 'Origin Address', 'Cleaners': 'Cleaner', 'Customer Full Name': 'Origin Customer'}, inplace=True)
-
-                API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
-                API_KEY = 'AIzaSyDchGVQKtpoMxkcvPMbX39U4EA5Zpol9mI'
+                
+                API_KEY = st.secrets["google"]["google_maps_api_key]
+                #API_KEY = os.getenv("GOOGLE_MAPS_API_KEY")
+                #API_KEY = 'AIzaSyDchGVQKtpoMxkcvPMbX39U4EA5Zpol9mI'
                 if not API_KEY:
                     st.warning("Google Maps API key not set. Skipping drive time calculation.")
                 else:
